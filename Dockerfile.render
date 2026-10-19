@@ -1,0 +1,42 @@
+FROM node:22-alpine AS frontend-build
+WORKDIR /frontend
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ ./
+RUN npm run build
+
+FROM maven:3.9-eclipse-temurin-21 AS backend-build
+WORKDIR /backend
+COPY backend/pom.xml ./
+RUN mvn -B dependency:go-offline
+COPY backend/src ./src
+RUN mvn -B package -DskipTests
+
+FROM eclipse-temurin:21-jre-jammy
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends nginx ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -f /etc/nginx/sites-enabled/default
+
+WORKDIR /app
+
+COPY --from=backend-build /backend/target/marketplace-1.0.0.jar /app/app.jar
+COPY --from=frontend-build /frontend/dist /usr/share/nginx/html
+COPY frontend/nginx.conf /etc/nginx/conf.d/marketplace.conf
+
+RUN sed -i \
+    -e 's/listen 80;/listen 10000;/' \
+    -e 's/backend:8080/127.0.0.1:8080/g' \
+    -e 's/X-Forwarded-Proto $scheme/X-Forwarded-Proto https/g' \
+    /etc/nginx/conf.d/marketplace.conf \
+    && mkdir -p /app/uploads
+
+ENV SERVER_PORT=8080 \
+    SERVER_FORWARD_HEADERS_STRATEGY=framework \
+    UPLOAD_DIR=/app/uploads \
+    JAVA_TOOL_OPTIONS="-Xms64m -Xmx256m -XX:ActiveProcessorCount=2"
+
+EXPOSE 10000
+
+CMD ["bash", "-c", "trap 'kill -TERM \"$java_pid\" \"$nginx_pid\" 2>/dev/null || true' TERM INT EXIT; java -jar /app/app.jar & java_pid=$!; nginx -g 'daemon off;' & nginx_pid=$!; wait -n \"$java_pid\" \"$nginx_pid\"; exit 1"]
