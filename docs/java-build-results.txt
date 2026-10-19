@@ -1,0 +1,56 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.marketplace:marketplace >---------------------
+[INFO] Building marketplace 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ marketplace ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ marketplace ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 13 source files with javac [debug parameters release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ marketplace ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/a4c594e2b2c8/fresh-extract/marketplace/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ marketplace ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ marketplace ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.marketplace.BusinessRulesTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 s -- in com.marketplace.BusinessRulesTest
+01:49:01.458 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+01:49:01.607 [main] INFO org.testcontainers.dockerclient.DockerMachineClientProviderStrategy -- docker-machine executable was not found on PATH ([/root/.codex/tmp/arg0/codex-arg0YUNZS1, /opt/codex/codex-path, /opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override, /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin, /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin, /opt/codex/runtimes/codex-primary-runtime/dependencies/bin, /usr/local/sbin, /usr/local/bin, /usr/sbin, /usr/bin, /sbin, /bin, /opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback])
+01:49:01.608 [main] ERROR org.testcontainers.dockerclient.DockerClientProviderStrategy -- Could not find a valid Docker environment. Please check configuration. Attempted configurations were:
+	UnixSocketClientProviderStrategy: failed with exception InvalidConfigurationException (Could not find unix domain socket). Root cause NoSuchFileException (/var/run/docker.sock)
+	DockerDesktopClientProviderStrategy: failed with exception NullPointerException (Cannot invoke "java.nio.file.Path.toString()" because the return value of "org.testcontainers.dockerclient.DockerDesktopClientProviderStrategy.getSocketPath()" is null)As no valid configuration was found, execution cannot continue.
+See https://java.testcontainers.org/on_failure.html for more details.
+[INFO] Running com.marketplace.PostgresIntegrationTest
+[WARNING] Tests run: 8, Failures: 0, Errors: 0, Skipped: 8, Time elapsed: 0.001 s -- in com.marketplace.PostgresIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 8
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ marketplace ---
+[INFO] Building jar: /workspace/scratch/a4c594e2b2c8/fresh-extract/marketplace/backend/target/marketplace-1.0.0.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ marketplace ---
+[INFO] Replacing main artifact /workspace/scratch/a4c594e2b2c8/fresh-extract/marketplace/backend/target/marketplace-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /workspace/scratch/a4c594e2b2c8/fresh-extract/marketplace/backend/target/marketplace-1.0.0.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.999 s
+[INFO] Finished at: 2026-10-18T01:49:02+09:00
+[INFO] ------------------------------------------------------------------------

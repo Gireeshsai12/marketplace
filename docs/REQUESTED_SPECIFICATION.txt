@@ -1,0 +1,938 @@
+You are a senior full-stack engineer, backend architect, UI engineer, and QA engineer. Build a complete Amazon-inspired multi-vendor marketplace named MARKETPLACE.
+
+Deliver the actual working source code as a downloadable ZIP named marketplace-fullstack.zip. I want to extract it, run it locally, and prepare it for online hosting.
+
+Do not stop after providing a plan, architecture, code snippets, or screenshots. Implement the project, run the available checks, fix failures, and package the final source.
+
+Use the attached reference image as the primary visual specification.
+
+## 1. Project objectives
+
+Build a substantial portfolio application using:
+
+- Java 21 and Spring Boot for the backend.
+- React and TypeScript for the frontend.
+- PostgreSQL for persistent application data.
+- Redis for appropriate caching and rate limiting.
+- Docker Compose for reproducible local execution.
+
+The application must have:
+
+1. A customer shopping experience.
+2. A seller portal.
+3. An administrator portal.
+4. Real API integration and database persistence.
+5. Reliable inventory, checkout, order, and refund workflows.
+6. A polished interface closely matching the reference image.
+7. Seeded demo accounts and realistic product data.
+8. Automated tests covering important business rules.
+9. Clear Windows-friendly setup instructions.
+10. A final downloadable ZIP containing the complete project.
+
+Prioritize a complete, demonstrable implementation. Do not describe missing functionality as complete.
+
+## 2. Reference image and visual fidelity
+
+The reference contains three independent application screens:
+
+- Shopping homepage.
+- Product details page.
+- Seller dashboard.
+
+Implement these as actual routes. Do not render the reference image as a page background or combine all three screens into one long webpage.
+
+Match the reference’s:
+
+- Dark navy header.
+- White and pale gray surfaces.
+- Warm orange primary actions.
+- Compact marketplace navigation.
+- Wide product search field.
+- Product photography and card proportions.
+- Typography hierarchy.
+- Spacing, borders, shadows, and alignment.
+- Seller sidebar, metric cards, chart, and orders table.
+
+Use the brand MARKETPLACE with a simple shopping bag icon. Do not use Amazon branding.
+
+Create a reusable design system with tokens for colors, spacing, typography, radii, and shadows. Suggested starting values:
+
+- Header navy: #071D34.
+- Primary orange: #FF8A00.
+- Main background: #F4F6F8.
+- Surface: #FFFFFF.
+- Main text: #111827.
+- Secondary text: #64748B.
+- Border: #E2E8F0.
+- Success: #16A34A.
+- Error: #DC2626.
+- Information: #2563EB.
+
+Adjust these values after visually comparing screenshots with the reference.
+
+Use Inter or a similar clean sans-serif font, bundled locally where permitted.
+
+Avoid generic oversized landing-page sections. This should look like a functional shopping platform with useful information density.
+
+The design must work at:
+
+- 1440px desktop width.
+- 1024px tablet width.
+- 390px mobile width.
+
+Use responsive navigation, collapsible filters, and suitable mobile layouts. Prevent horizontal page overflow.
+
+Treat the image as a layout reference. Correct inconsistent sample dates, product thumbnails, or numbers instead of reproducing obvious visual-generation mistakes.
+
+## 3. Architecture
+
+Use a modular Spring Boot application with clear domain boundaries:
+
+- Identity and access.
+- Customers and addresses.
+- Sellers and stores.
+- Catalog and categories.
+- Inventory.
+- Cart and wishlist.
+- Pricing and promotions.
+- Checkout and payments.
+- Orders and fulfillment.
+- Returns and refunds.
+- Reviews.
+- Notifications.
+- Analytics.
+- Administration.
+
+Use a modular monolith. Avoid unnecessary distributed services.
+
+Within modules, separate:
+
+- Controllers.
+- Request and response DTOs.
+- Application services.
+- Domain logic.
+- Persistence.
+- Integration adapters.
+
+Controllers should remain thin. Do not expose persistence entities directly.
+
+Use:
+
+- Spring Security.
+- Bean Validation.
+- Spring Data JPA.
+- Flyway migrations.
+- OpenAPI documentation.
+- Maven Wrapper.
+- Structured logging.
+- Spring Boot Actuator.
+- Testcontainers for database integration tests where supported.
+
+Frontend:
+
+- React with TypeScript.
+- Vite.
+- React Router.
+- TanStack Query.
+- React Hook Form.
+- Zod.
+- Tailwind CSS.
+- An accessible component library where useful.
+- Lucide icons.
+- Recharts for seller analytics.
+
+Pin compatible dependency versions. Commit the frontend lockfile.
+
+## 4. Customer homepage
+
+Create a homepage closely matching the first reference screen.
+
+Header:
+
+- MARKETPLACE logo.
+- Delivery location displaying Lowell, MA for the seeded customer.
+- Working product search.
+- Account menu.
+- Orders link.
+- Cart icon and actual item count.
+
+Secondary navigation:
+
+- All Categories.
+- Deals.
+- Electronics.
+- Home & Kitchen.
+- Fashion.
+- Beauty & Personal Care.
+- Sports & Outdoors.
+- Toys & Games.
+- Health.
+- Automotive.
+
+Hero:
+
+- Headline: “Upgrade your everyday”.
+- Supporting copy similar to the reference.
+- Warm, neutral product photography featuring headphones, a laptop, and home accessories.
+- Orange “Shop deals” button.
+- Working carousel controls if multiple slides are provided.
+
+Below the hero:
+
+- Eight category tiles.
+- Today’s deals.
+- Product cards with image, title, rating, review count, current price, original price, and discount.
+- Additional recommended or recently viewed products.
+- Useful footer navigation.
+
+Populate a catalog of at least 48 products across the main categories.
+
+Include these recognizable demo products:
+
+- Studio Wireless Headphones — $129.99.
+- 14-inch Laptop Computer — $699.99.
+- Digital Air Fryer — $89.99.
+- Espresso Machine — $249.99.
+- Smart Watch — $199.99.
+- Running Shoes — $64.99.
+
+Use consistent, relevant product images. Bundle assets locally where licensing permits so the demo does not depend on fragile external image URLs.
+
+Include an asset attribution file. Do not use random image services that return unrelated products.
+
+## 5. Search and catalog browsing
+
+Implement:
+
+- Search by product title, brand, and description.
+- Category filtering.
+- Price range.
+- Minimum rating.
+- In-stock filtering.
+- Seller filtering.
+- Sort by relevance, price, rating, and newest.
+- Pagination.
+- Search suggestions.
+- Shareable URL query parameters.
+- Useful empty states.
+- Loading and error states.
+
+Use PostgreSQL full-text search with appropriate indexes for this project. Do not add a search cluster unless clearly justified.
+
+Whitelist supported sort fields. Validate and bound query parameters.
+
+## 6. Product details
+
+Match the second reference screen.
+
+Include:
+
+- Breadcrumb navigation.
+- Thumbnail gallery.
+- Large product image.
+- Product title and brand.
+- Average rating and review count.
+- Current and original prices.
+- Calculated discount.
+- Description.
+- Product highlights.
+- Variant selectors.
+- Stock information.
+- Quantity selector.
+- Add to cart.
+- Buy now.
+- Delivery information.
+- Seller information.
+- Return policy.
+- Product specifications.
+- Customer reviews.
+- Related products.
+
+Use Studio Wireless Headphones as the primary demonstration page.
+
+Support variants with their own:
+
+- SKU.
+- Price where applicable.
+- Inventory.
+- Color or size attributes.
+- Images where applicable.
+
+Changing variants must update the relevant information.
+
+Only show discounts when the original price exceeds the current price. Disable purchasing for unavailable variants.
+
+## 7. Authentication and authorization
+
+Support:
+
+- Registration.
+- Login.
+- Logout.
+- Current-user endpoint.
+- Password reset through a local demo email service.
+- Customer, seller, and administrator roles.
+
+Provide seeded accounts:
+
+- customer@marketplace.local.
+- seller@marketplace.local.
+- admin@marketplace.local.
+
+Document development-only passwords.
+
+Use secure password hashing and server-managed sessions with HttpOnly cookies, or another thoroughly implemented secure approach. Document the choice.
+
+For cookie authentication:
+
+- Implement CSRF protection.
+- Use appropriate SameSite settings.
+- Enable Secure cookies in production.
+- Restrict CORS appropriately.
+- Rotate or invalidate sessions as needed.
+
+Enforce authorization on the backend:
+
+- Customers can access only their own addresses, carts, orders, and returns.
+- Sellers can manage only their own products, inventory, and order portions.
+- Administrators can perform explicitly defined administrative operations.
+
+Frontend route guards are for navigation convenience; backend checks are mandatory.
+
+## 8. Cart and wishlist
+
+Implement persistent server-side carts for signed-in customers.
+
+Support:
+
+- Add items.
+- Update quantities.
+- Remove items.
+- Move items to wishlist.
+- View totals.
+- Display availability changes.
+- Apply eligible coupon codes.
+
+A local guest cart may be supported, with a documented merge policy on login.
+
+Do not trust client-submitted prices or discounts.
+
+Recalculate totals on the backend.
+
+Use decimal-safe monetary calculations:
+
+- Java BigDecimal.
+- PostgreSQL NUMERIC.
+- Currency recorded with monetary values.
+- Consistent rounding rules.
+
+Use USD for the first release.
+
+## 9. Checkout and payments
+
+Build a complete checkout:
+
+1. Select or create shipping address.
+2. Review items.
+3. Select shipping method.
+4. Apply a valid promotion.
+5. Review itemized totals.
+6. Complete payment.
+7. Show order confirmation.
+
+Clearly display:
+
+- Subtotal.
+- Discount.
+- Shipping.
+- Demo tax.
+- Grand total.
+
+Use a documented demonstration tax rule. Label it as demo behavior rather than claiming production tax compliance.
+
+Provide two payment adapters:
+
+### Local demo provider
+
+Must work without external credentials.
+
+Support:
+
+- Successful payment.
+- Declined payment.
+- Delayed payment.
+- Duplicate callback.
+- Payment timeout.
+
+Clearly label demo payments.
+
+### Optional Stripe test integration
+
+If implemented, use hosted test checkout.
+
+- Never store raw card data.
+- Verify webhook signatures.
+- Handle duplicate and out-of-order webhook events.
+- Keep credentials outside source code.
+- Provide environment variable documentation.
+
+Never require paid services or real payment credentials to run the core application.
+
+## 10. Inventory and checkout correctness
+
+Implement meaningful backend safeguards.
+
+Required behavior:
+
+- Prevent overselling during concurrent checkout.
+- Reserve inventory for a bounded period.
+- Release expired or failed reservations.
+- Convert reservations into completed stock deductions exactly once.
+- Use database locking or atomic conditional updates appropriately.
+- Make checkout idempotent.
+- Persist payment event identifiers to prevent duplicate processing.
+- Record inventory changes in an auditable ledger.
+
+Define and implement a documented checkout state machine.
+
+Handle the important race cases:
+
+- Two customers attempt to buy the last unit.
+- A customer submits checkout twice.
+- A payment callback arrives twice.
+- Payment fails after stock reservation.
+- A reservation expires.
+- A late successful payment arrives after expiration.
+- A cancellation races with fulfillment.
+
+For late payments, choose a safe documented policy, such as reacquiring stock if available or entering a refund-required state.
+
+Do not use Redis as the authoritative inventory database.
+
+## 11. Orders and fulfillment
+
+A multi-vendor checkout must support:
+
+- One customer-facing parent order.
+- Separate seller order portions.
+- Independent seller fulfillment.
+- Correct allocation of discounts, shipping, and totals.
+
+Persist order item snapshots so later catalog changes do not alter historical orders.
+
+Snapshots should include:
+
+- Product title.
+- Variant attributes.
+- SKU.
+- Seller identity.
+- Unit price.
+- Quantity.
+- Applied discount.
+- Tax and shipping allocation where applicable.
+
+Support:
+
+- Order history.
+- Order details.
+- Payment status.
+- Fulfillment status.
+- Shipment timeline.
+- Cancellation according to valid state transitions.
+- Return requests.
+- Refund status.
+
+Separate payment, fulfillment, and return states instead of forcing all behavior into one status field.
+
+Demo tracking must be labeled as simulated. Do not imply integration with real carriers.
+
+## 12. Seller dashboard
+
+Match the third reference screen.
+
+Sidebar:
+
+- Overview.
+- Products.
+- Orders.
+- Inventory.
+- Analytics.
+- Settings.
+
+Overview:
+
+- Revenue.
+- Order count.
+- Product count.
+- A valid fourth business metric.
+- Revenue trend chart.
+- Recent orders.
+- Low-stock products.
+- Date range selector.
+
+All values must come from backend data.
+
+If showing conversion rate, implement and define the underlying session and purchase tracking. Otherwise use a defensible metric such as average order value.
+
+Seller product management:
+
+- Create and edit products.
+- Manage variants.
+- Upload images.
+- Assign categories.
+- Set prices.
+- Activate and archive listings.
+- View validation errors.
+
+Seller inventory:
+
+- Current stock.
+- Reserved stock.
+- Available stock.
+- Low-stock threshold.
+- Stock adjustment with reason.
+- Inventory history.
+
+Seller orders:
+
+- Search and filter.
+- View seller-owned order items.
+- Update allowed fulfillment states.
+- Record simulated shipment details.
+- Process return requests within defined permissions.
+
+Seller analytics:
+
+- Sales by date.
+- Best-selling products.
+- Order status breakdown.
+- Revenue by product.
+- CSV export.
+
+Prevent spreadsheet formula injection in CSV exports.
+
+## 13. Administrator portal
+
+Provide a functional, consistent interface for:
+
+- User management.
+- Seller approval or suspension.
+- Category management.
+- Product moderation.
+- Order inspection.
+- Return and refund oversight.
+- Promotion management.
+- Audit log review.
+
+Use explicit allowed actions and validated state transitions.
+
+Audit sensitive changes with:
+
+- Actor.
+- Action.
+- Resource.
+- Timestamp.
+- Relevant change summary.
+
+Do not log secrets or payment credentials.
+
+## 14. Promotions and reviews
+
+Promotions:
+
+- Percentage and fixed-value discounts.
+- Start and end times.
+- Minimum order amount.
+- Maximum discount where applicable.
+- Usage limits.
+- Per-customer limits.
+- Defined stacking policy.
+
+Validate eligibility atomically when usage limits are involved.
+
+Reviews:
+
+- Rating from 1 to 5.
+- Review title and text.
+- Verified-purchase indicator based on actual order records.
+- Defined review eligibility.
+- Edit or delete own review.
+- Administrator moderation.
+
+Keep rating aggregates consistent with review changes.
+
+## 15. Notifications and background processing
+
+Implement in-app notifications for:
+
+- Order confirmation.
+- Payment failure.
+- Shipment update.
+- Return update.
+- Low stock for sellers.
+
+Use a local email viewer such as Mailpit for development emails.
+
+Use a transactional outbox for important domain notifications:
+
+- Persist events in the business transaction.
+- Process them asynchronously.
+- Retry failures.
+- Ensure consumers are idempotent.
+- Record exhausted retries for inspection.
+
+Background jobs should include:
+
+- Reservation expiry.
+- Outbox processing.
+- Notification delivery.
+
+Prevent duplicate effects when multiple workers execute.
+
+## 16. Database requirements
+
+Use Flyway migrations and database constraints.
+
+Model the required entities, including:
+
+- Users and roles.
+- Sessions or authentication records.
+- Addresses.
+- Seller stores.
+- Categories.
+- Products.
+- Product variants.
+- Product images.
+- Inventory.
+- Inventory reservations.
+- Inventory ledger.
+- Carts and cart items.
+- Wishlists.
+- Promotions and redemptions.
+- Parent orders.
+- Seller orders.
+- Order items.
+- Payments and payment events.
+- Shipments.
+- Returns and refunds.
+- Reviews.
+- Notifications.
+- Outbox events.
+- Audit logs.
+
+Add indexes based on actual query patterns.
+
+Use UTC timestamps and documented timezone handling.
+
+Avoid N+1 queries.
+
+Use optimistic locking for appropriate edit workflows and transaction-safe operations for inventory and payment changes.
+
+Seed data must be deterministic and safe to run repeatedly.
+
+## 17. API behavior
+
+Use consistent REST conventions and document the APIs.
+
+Provide:
+
+- Validation errors.
+- Stable error codes.
+- Appropriate HTTP statuses.
+- Pagination metadata.
+- Correlation IDs.
+- Safe error messages.
+- OpenAPI documentation.
+- Example requests.
+
+Document idempotency headers and replay behavior.
+
+Use centralized exception handling. Do not expose stack traces or SQL details to clients.
+
+## 18. Security and uploads
+
+Implement:
+
+- Authorization and ownership checks.
+- Input validation.
+- Login rate limiting.
+- Safe file upload size limits.
+- Actual image validation.
+- Random server-generated upload names.
+- Safe storage paths.
+- Protection against path traversal.
+- Restricted image formats.
+- Safe rendering of user content.
+- Environment-based secrets.
+- Production-safe defaults.
+
+Use local persistent storage for uploaded images in Docker development.
+
+Provide an optional S3-compatible adapter if feasible, but the application must work locally without cloud credentials.
+
+## 19. Frontend quality
+
+Every implemented screen should have:
+
+- Loading behavior.
+- Empty state.
+- Error state.
+- Success feedback.
+- Form validation.
+- Accessible labels.
+- Keyboard navigation.
+- Visible focus states.
+- Confirmation for destructive actions.
+
+Use real API calls for core behavior.
+
+Do not use hardcoded frontend arrays as the source of truth for products, orders, inventory, reviews, or analytics.
+
+Do not leave dead buttons, empty dashboards, placeholder forms, or silent no-op handlers.
+
+For advanced actions that are intentionally simulated, make that clear in the interface and documentation.
+
+## 20. Testing
+
+Write meaningful tests around business risk.
+
+Backend tests must cover:
+
+- Registration and authentication.
+- Customer order ownership.
+- Seller resource isolation.
+- Price recalculation.
+- Coupon eligibility and limits.
+- Concurrent purchase of the last stock unit.
+- Duplicate checkout requests.
+- Duplicate payment callbacks.
+- Failed payment stock release.
+- Reservation expiration.
+- Late payment handling.
+- Order state transitions.
+- Cancellation and refund idempotency.
+- Review eligibility.
+- Dashboard calculations.
+
+Use PostgreSQL integration tests for database-specific behavior.
+
+Frontend tests should cover important form and cart behavior.
+
+Use Playwright for end-to-end journeys:
+
+1. Customer logs in.
+2. Searches for headphones.
+3. Opens the product.
+4. Selects a variant.
+5. Adds it to cart.
+6. Completes demo checkout.
+7. Sees the order in history.
+8. Seller logs in.
+9. Sees the new seller order.
+10. Updates fulfillment.
+11. Customer sees the update.
+12. Administrator inspects the order.
+
+Also test declined payment and unauthorized resource access.
+
+Use deterministic test data.
+
+## 21. Visual verification
+
+Run the frontend and capture screenshots of:
+
+- Homepage.
+- Headphone details page.
+- Seller overview.
+- Mobile homepage.
+- Mobile product page.
+
+Compare the first three with the attached image.
+
+Check:
+
+- Header height and alignment.
+- Search field width.
+- Hero composition.
+- Category tile spacing.
+- Product card proportions.
+- Product gallery layout.
+- Purchase panel.
+- Sidebar dimensions.
+- Metric cards.
+- Chart and table balance.
+- Colors and typography.
+
+Fix visible differences where practical.
+
+Do not claim pixel-perfect matching unless a genuine comparison supports that claim. Report material deviations honestly.
+
+## 22. Local execution
+
+Provide a root Docker Compose configuration running:
+
+- Frontend or reverse proxy.
+- Backend.
+- PostgreSQL.
+- Redis.
+- Mailpit.
+
+Include:
+
+- Health checks.
+- Persistent database volume.
+- Persistent upload storage.
+- Correct service dependencies.
+- Development environment defaults.
+- An .env.example.
+- No committed production secrets.
+
+The main startup command should be:
+
+docker compose up --build
+
+Document exact application, API documentation, and email viewer URLs.
+
+Include a Windows PowerShell guide covering:
+
+1. Install prerequisites.
+2. Extract ZIP.
+3. Open terminal in project folder.
+4. Copy environment example if needed.
+5. Run startup command.
+6. Wait for health checks.
+7. Open the application.
+8. Log in with demo accounts.
+9. Stop services.
+10. Reset demo data using a clearly labeled destructive command.
+
+Also provide non-Docker development instructions with Maven Wrapper and npm.
+
+## 23. Deployment preparation
+
+Include production-oriented Dockerfiles and documentation for a deployment using:
+
+- A frontend host or reverse proxy.
+- A Java container host.
+- Managed PostgreSQL.
+- Managed Redis if enabled.
+- Persistent or object storage.
+
+Provide an AWS deployment guide as one example.
+
+Document:
+
+- Required environment variables.
+- HTTPS and cookie settings.
+- CORS and CSRF considerations.
+- Database migrations.
+- Persistent uploads.
+- Logging.
+- Health checks.
+- Backups.
+- Resource requirements.
+
+Do not deploy or create paid resources without a separate request.
+
+## 24. Repository structure
+
+Use a clear structure similar to:
+
+marketplace/
+  frontend/
+  backend/
+  infra/
+  docs/
+  assets/
+  scripts/
+  docker-compose.yml
+  .env.example
+  README.md
+
+Include these documents:
+
+- README.md.
+- ARCHITECTURE.md.
+- DATABASE.md.
+- API.md.
+- SECURITY.md.
+- TESTING.md.
+- DEPLOYMENT.md.
+- DEMO_GUIDE.md.
+- ACCEPTANCE_REPORT.md.
+- ASSET_ATTRIBUTIONS.md.
+- KNOWN_LIMITATIONS.md.
+
+Keep documentation specific to the implemented application.
+
+## 25. Delivery process
+
+Work through these phases without stopping after the plan:
+
+1. Inspect the reference image.
+2. Define visual tokens and business invariants.
+3. Create the repository and database migrations.
+4. Implement authentication and catalog.
+5. Build the three reference screens.
+6. Implement cart, checkout, inventory, and payments.
+7. Implement orders and fulfillment.
+8. Complete seller and administrator workflows.
+9. Add background jobs, notifications, and analytics.
+10. Run tests and fix failures.
+11. Perform visual verification.
+12. Verify a clean startup.
+13. Package the ZIP.
+14. Extract the ZIP into a fresh directory and repeat the smoke test where the environment supports it.
+
+Preserve progress in files if execution requires multiple stages.
+
+Do not replace the Java backend with a frontend-only mock.
+
+Do not introduce extra technologies solely to make the stack look larger.
+
+## 26. Acceptance criteria
+
+The project is complete only when:
+
+- The three primary screens closely follow the reference.
+- Products and images display reliably.
+- Search, filters, and sorting work.
+- Authentication and role permissions work.
+- Cart changes persist.
+- Checkout creates valid database-backed orders.
+- Demo payments work without external credentials.
+- Stock cannot become negative under concurrent purchase.
+- Duplicate requests do not create duplicate orders or deductions.
+- Sellers can manage their own products and fulfillment.
+- Dashboard metrics reflect stored data.
+- Customers can view their order updates.
+- Administrator workflows function.
+- Important tests pass.
+- Docker startup is verified where possible.
+- The ZIP contains all source, migrations, assets, and documentation.
+
+Do not include node_modules, build caches, credentials, or unnecessary generated files in the ZIP.
+
+If an environmental limitation prevents a check, record:
+
+- The exact check.
+- The reason it could not run.
+- What was verified instead.
+- The command the user should run.
+
+Never fabricate test results, screenshots, benchmark numbers, or successful execution.
+
+## 27. Final response
+
+Return:
+
+1. Download link to marketplace-fullstack.zip.
+2. Screenshots of the implemented homepage, product page, and seller dashboard.
+3. Exact startup command.
+4. Local application URL.
+5. Demo account credentials.
+6. Short summary of implemented features.
+7. Actual test results.
+8. Any remaining limitations.
+
+The deliverable must be a working, documented, visually polished Java + React marketplace that I can run locally and demonstrate in portfolio interviews.

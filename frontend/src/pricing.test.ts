@@ -1,0 +1,2 @@
+import{describe,it,expect}from'vitest';import{money,date}from'./api';
+describe('customer-facing formatting',()=>{it('formats zero and cents in USD',()=>{expect(money(0)).toBe('$0.00');expect(money('129.99')).toBe('$129.99');});it('never displays missing prices as NaN',()=>{expect(money(undefined)).toBe('$0.00');});it('shows a meaningful order date',()=>{expect(date('2026-10-17T12:00:00Z')).toContain('2026');});});

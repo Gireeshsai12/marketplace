@@ -1,0 +1,15 @@
+.env
+node_modules/
+dist/
+target/
+uploads/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+/files/
+/Apply-MarketplaceFix.ps1
+/manifest.json
+.env.*
+!.env.example
+*.zip

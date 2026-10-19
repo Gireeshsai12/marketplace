@@ -1,0 +1,3 @@
+package com.marketplace;
+import java.util.*;import org.springframework.stereotype.*;import org.springframework.jdbc.core.*;
+@Component public class Db {final JdbcTemplate j;Db(JdbcTemplate j){this.j=j;} public List<Map<String,Object>> all(String s,Object...a){return j.queryForList(s,a);} public Map<String,Object> one(String s,Object...a){var rows=all(s,a);if(rows.isEmpty())throw new Failure(404,"NOT_FOUND","Resource not found");return rows.get(0);} public long id(String s,Object...a){return j.queryForObject(s,Long.class,a);} public int exec(String s,Object...a){return j.update(s,a);} public static long n(Map<String,Object> m,String k){return ((Number)m.get(k)).longValue();} public static String str(Map<String,Object> m,String k){return String.valueOf(m.get(k));}}

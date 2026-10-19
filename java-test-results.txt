@@ -1,0 +1,34 @@
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ OrderPresentationTest ✔
+│  │  ├─ corruptOrIncompleteSnapshotsDoNotSilentlyRenderBlank() ✔
+│  │  ├─ paidAndPendingProcessingOrdersCanBeCancelled() ✔
+│  │  ├─ addressPreservesUnicodeAndLeadingZipZero() ✔
+│  │  ├─ storedSnapshotBecomesPlainAddressFields() ✔
+│  │  ├─ anyFulfilledSellerPortionPreventsWholeOrderCancellation() ✔
+│  │  └─ terminalPaymentsAndEmptyOrdersCannotBeCancelled() ✔
+│  └─ BusinessRulesTest ✔
+│     ├─ standardShippingThreshold() ✔
+│     ├─ csvNeutralizesFormulaInjection() ✔
+│     ├─ allocationsSumExactlyWithRemainder() ✔
+│     ├─ expressShippingIsExplicit() ✔
+│     ├─ percentageCouponCannotExceedSubtotal() ✔
+│     ├─ invalidShippingRejected() ✔
+│     └─ taxUsesDecimalAndHalfUp() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 339 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[        13 tests found           ]
+[         0 tests skipped         ]
+[        13 tests started         ]
+[         0 tests aborted         ]
+[        13 tests successful      ]
+[         0 tests failed          ]
+

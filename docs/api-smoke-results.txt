@@ -1,0 +1,37 @@
+PASS anonymous cart denied
+PASS 48 deterministic catalog products
+PASS PostgreSQL full-text title search
+PASS bounded filter validation
+PASS registration, BCrypt login, session identity
+PASS cart rejects negative quantities
+PASS server quote uses decimal-safe discount and demo tax
+PASS successful payment creates paid order
+PASS duplicate checkout returns same order
+PASS duplicate payment event is accepted idempotently
+PASS customer order ownership enforced
+PASS customer cannot access seller inventory
+PASS seller cannot adjust another seller inventory
+PASS per-customer coupon usage limit enforced
+PASS refund and cancellation restock exactly once
+PASS decline releases reservation without reducing stock
+PASS delayed payment holds pending order
+PASS delayed callback commits reservation
+PASS invalid fulfillment transition rejected
+PASS customer sees seller shipment update
+PASS shipped order cancellation rejected
+PASS verified-purchase review updates rating aggregate
+PASS return approval refunds idempotently
+PASS review requires actual paid purchase
+PASS seller revenue excludes refunded portions
+PASS administrator can inspect order snapshots
+PASS sensitive seller operations recorded in audit log
+PASS CSRF-free state-changing request rejected
+PASS customer cannot access administrator resources
+PASS administrator suspension invalidates account access
+PASS seller catalog create/edit/archive and optimistic conflict protection
+PASS seller can add a priced inventory variant
+PASS inventory adjustment cannot make available stock negative
+PASS image upload re-encodes valid PNG and ignores client filename
+PASS disguised non-image upload rejected
+PASS logout invalidates session
+API SMOKE: 36 checks passed

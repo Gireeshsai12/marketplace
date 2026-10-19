@@ -1,0 +1,7 @@
+PASS 1 customer login
+PASS 2 search, variant, cart, demo checkout, confirmation
+PASS 3 order history
+PASS 4 seller order and simulated shipment
+PASS 5 customer sees seller fulfillment
+PASS 6 administrator order inspection
+BROWSER SMOKE: 6 journey stages passed
